@@ -1,0 +1,44 @@
+{
+  "initiatives": [
+    {
+      "id": "dashboard",
+      "title": "Dashboard",
+      "description": "Overview of all AI tools and their performance insights",
+      "icon": "speedometer",
+      "color": "dashboard",
+      "url": "https://dashboard.ams.ai"
+    },
+    {
+      "id": "tsense",
+      "title": "T-Sense",
+      "description": "T-Sense collects ticket information from ITSM tools like ServiceNow, FreshDesk, FreshService, ZenDesk etc. and resolves issues based on past experience.",
+      "icon": "ticket",
+      "color": "tsense",
+      "url": "https://tsense.ams.ai"
+    },
+    {
+      "id": "csense",
+      "title": "C-Sense",
+      "description": "C-Sense gauges the rank of source code based on parameters like Cyclomatic Complexity, Class Coupling, Code Maintainability, and more.",
+      "icon": "code",
+      "color": "csense",
+      "url": "https://csense.ams.ai"
+    },
+    {
+      "id": "selfheal",
+      "title": "Self Heal AI",
+      "description": "Application maintenance AI that diagnoses and self-heals issues in real time.",
+      "icon": "band-aid",
+      "color": "selfheal",
+      "url": "https://selfheal.ams.ai"
+    },
+    {
+      "id": "resource-management",
+      "title": "Resource Management Tool",
+      "description": "Intelligent resource allocation and management for optimal performance.",
+      "icon": "users",
+      "color": "primary",
+      "url": "https://resources.ams.ai"
+    }
+  ]
+}
