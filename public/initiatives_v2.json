@@ -1,0 +1,108 @@
+[
+  {
+    "id": "nhs-framework",
+    "title": "NHS Framework",
+    "description": "Healthcare-focused AI framework for compliance and automation",
+    "icon": "hospital",
+    "iconColor": "bg-red-500",
+    "url": "#"
+  },
+  {
+    "id": "nlp-sql",
+    "title": "NLP → SQL (Data.ai)",
+    "description": "Natural Language to SQL conversion powered by Data.ai",
+    "icon": "database",
+    "iconColor": "bg-blue-600",
+    "url": "#"
+  },
+  {
+    "id": "delivery-2",
+    "title": "Delivery 2.0",
+    "description": "Next-gen delivery platform with AI-driven insights",
+    "icon": "truck",
+    "iconColor": "bg-indigo-500",
+    "url": "#"
+  },
+  {
+    "id": "api-testing",
+    "title": "API Automation Testing",
+    "description": "Automated API validation and regression testing",
+    "icon": "beaker",
+    "iconColor": "bg-orange-500",
+    "url": "#"
+  },
+  {
+    "id": "ams-ai",
+    "title": "AMS.AI (Self-Heal Platform)",
+    "description": "AI-powered platform for proactive and automated application maintenance",
+    "icon": "cpu",
+    "iconColor": "bg-pink-500",
+    "url": "#",
+    "subInitiatives": [
+      {
+        "id": "watchbot",
+        "title": "Watchbot",
+        "description": "Proactive system monitoring",
+        "icon": "eye",
+        "iconColor": "bg-blue-500",
+        "url": "#"
+      },
+      {
+        "id": "ticket-bot",
+        "title": "Ticket Monitoring Bot",
+        "description": "Auto-track and resolve tickets",
+        "icon": "ticket",
+        "iconColor": "bg-yellow-500",
+        "url": "#"
+      },
+      {
+        "id": "log-monitor",
+        "title": "Application Log Monitor",
+        "description": "Anomaly and error detection",
+        "icon": "file-text",
+        "iconColor": "bg-purple-500",
+        "url": "#"
+      },
+      {
+        "id": "agent-bot",
+        "title": "Agent Bot (Fine-Tuned)",
+        "description": "Support ticket assistant",
+        "icon": "bot",
+        "iconColor": "bg-green-500",
+        "url": "#"
+      },
+      {
+        "id": "code-copilot",
+        "title": "Code Generation Copilot",
+        "description": "Source code generator & bug fix helper",
+        "icon": "code",
+        "iconColor": "bg-indigo-500",
+        "url": "#"
+      },
+      {
+        "id": "tsense",
+        "title": "Tsense",
+        "description": "Telemetry insights",
+        "icon": "activity",
+        "iconColor": "bg-pink-400",
+        "url": "#"
+      },
+      {
+        "id": "csense",
+        "title": "CSense",
+        "description": "Customer behavior insights",
+        "icon": "users",
+        "iconColor": "bg-cyan-500",
+        "url": "#"
+      },
+      {
+        "id": "ecommerce-portal",
+        "title": "E-commerce Portal (Farmer’s Market)",
+        "description": "Digital marketplace",
+        "icon": "shopping-cart",
+        "iconColor": "bg-teal-500",
+        "url": "#"
+      }
+    ]
+  }
+]

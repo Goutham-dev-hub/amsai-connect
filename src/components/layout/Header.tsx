@@ -55,7 +55,7 @@ const Header = () => {
                 variant="outline"
                 size="sm"
                 onClick={handleLogout}
-                className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10"
+                className="border-primary-foreground/20 text-primary-foreground bg-primary-foreground/10"
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Logout

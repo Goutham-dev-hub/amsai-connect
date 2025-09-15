@@ -7,7 +7,7 @@ const LoginButton = () => {
   const { instance } = useMsal();
 
   const handleLogin = () => {
-    instance.loginPopup(loginRequest).catch((e) => {
+    instance.loginRedirect(loginRequest).catch((e) => {
       console.error("Login failed:", e);
     });
   };
