@@ -83,7 +83,7 @@ const InitiativeCard = ({ initiative }: InitiativeCardProps) => {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className={cn("flex h-12 w-12 items-center justify-center rounded-lg", initiative.iconColor || "bg-primary")}>
-              <IconComponent className="h-6 w-6 text-white" />
+              <IconComponent className="h-6 w-6 text-primary-foreground" />
             </div>
             <div>
               <h3 className="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
@@ -116,8 +116,8 @@ const InitiativeCard = ({ initiative }: InitiativeCardProps) => {
                       className="flex items-center gap-2 p-2 rounded-md hover:bg-muted transition-colors cursor-pointer"
                       onClick={(e) => handleSubInitiativeClick(e, subItem)}
                     >
-                      <div className={cn("p-1 rounded", subItem.iconColor || "bg-primary")}>
-                        <SubIconComponent className="h-3 w-3 text-white" />
+                       <div className={cn("p-1 rounded", subItem.iconColor || "bg-primary")}>
+                        <SubIconComponent className="h-3 w-3 text-primary-foreground" />
                       </div>
                       <span className="text-xs text-muted-foreground truncate">{subItem.title}</span>
                     </div>
