@@ -74,7 +74,7 @@ export function AppSidebar({ initiatives, selectedInitiative, onInitiativeClick 
   const isCollapsed = state === "collapsed";
 
   return (
-    <Sidebar className="border-r border-border h-[calc(100vh-4rem)]">
+    <Sidebar style={{position:"fixed", top:"68px"}} className="border-r border-border h-[calc(100vh-4rem)]">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>
