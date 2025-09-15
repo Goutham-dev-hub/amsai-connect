@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
 import { 
-  ChevronDown, 
-  ChevronRight,
   Hospital, 
   Database, 
   Truck, 
@@ -68,11 +65,14 @@ const iconMap: Record<string, any> = {
   "shopping-cart": ShoppingCart,
 };
 
-export function AppSidebar() {
+interface AppSidebarProps {
+  onInitiativeClick: (initiative: Initiative) => void;
+}
+
+export function AppSidebar({ onInitiativeClick }: AppSidebarProps) {
   const { state } = useSidebar();
-  const location = useLocation();
   const [initiatives, setInitiatives] = useState<Initiative[]>([]);
-  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+  const [selectedInitiative, setSelectedInitiative] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchInitiatives = async () => {
@@ -90,22 +90,15 @@ export function AppSidebar() {
     fetchInitiatives();
   }, []);
 
-  const toggleExpanded = (id: string) => {
-    setExpandedItems(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
-      } else {
-        newSet.add(id);
-      }
-      return newSet;
-    });
+  const handleInitiativeClick = (initiative: Initiative) => {
+    setSelectedInitiative(initiative.id);
+    onInitiativeClick(initiative);
   };
 
   const isCollapsed = state === "collapsed";
 
   return (
-    <Sidebar className="border-r border-border">
+    <Sidebar className="border-r border-border h-[calc(100vh-4rem)]">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
@@ -115,43 +108,19 @@ export function AppSidebar() {
             <SidebarMenu>
               {initiatives.map((initiative) => {
                 const IconComponent = iconMap[initiative.icon] || Cpu;
-                const hasSubItems = initiative.subInitiatives && initiative.subInitiatives.length > 0;
-                const isExpanded = expandedItems.has(initiative.id);
+                const isSelected = selectedInitiative === initiative.id;
 
                 return (
                   <SidebarMenuItem key={initiative.id}>
                     <SidebarMenuButton
-                      onClick={() => hasSubItems ? toggleExpanded(initiative.id) : window.open(initiative.url, '_blank')}
-                      className="w-full justify-between"
+                      onClick={() => handleInitiativeClick(initiative)}
+                      className={`w-full ${isSelected ? 'bg-accent text-accent-foreground' : ''}`}
                     >
                       <div className="flex items-center gap-2">
                         <IconComponent className="h-4 w-4" />
                         {!isCollapsed && <span className="truncate">{initiative.title}</span>}
                       </div>
-                      {!isCollapsed && hasSubItems && (
-                        isExpanded ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />
-                      )}
                     </SidebarMenuButton>
-                    {hasSubItems && isExpanded && !isCollapsed && (
-                      <SidebarMenuSub>
-                        {initiative.subInitiatives?.map((subItem) => {
-                          const SubIconComponent = iconMap[subItem.icon] || Cpu;
-                          return (
-                            <SidebarMenuSubItem key={subItem.id}>
-                              <SidebarMenuSubButton
-                                asChild
-                                onClick={() => window.open(subItem.url, '_blank')}
-                              >
-                                <div className="flex items-center gap-2 cursor-pointer">
-                                  <SubIconComponent className="h-3 w-3" />
-                                  <span className="truncate text-xs">{subItem.title}</span>
-                                </div>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          );
-                        })}
-                      </SidebarMenuSub>
-                    )}
                   </SidebarMenuItem>
                 );
               })}
