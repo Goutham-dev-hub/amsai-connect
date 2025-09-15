@@ -1,0 +1,14 @@
+{
+  "summary": {
+    "errorsLastHour": 5,
+    "warningsLastHour": 32,
+    "anomaliesDetected": 2
+  },
+  "series": [
+    { "time": "-60m", "errors": 1, "warnings": 8 },
+    { "time": "-45m", "errors": 2, "warnings": 5 },
+    { "time": "-30m", "errors": 0, "warnings": 10 },
+    { "time": "-15m", "errors": 1, "warnings": 3 },
+    { "time": "now", "errors": 1, "warnings": 6 }
+  ]
+}

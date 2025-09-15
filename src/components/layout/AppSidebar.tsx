@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import { 
+  Home,
   Hospital, 
   Database, 
   Truck, 
@@ -24,9 +24,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   useSidebar,
 } from "@/components/ui/sidebar";
 
@@ -45,11 +42,12 @@ interface Initiative {
   description: string;
   icon: string;
   iconColor: string;
-  url: string;
+  url?: string;
   subInitiatives?: SubInitiative[];
 }
 
 const iconMap: Record<string, any> = {
+  home: Home,
   hospital: Hospital,
   database: Database,
   truck: Truck,
@@ -66,54 +64,32 @@ const iconMap: Record<string, any> = {
 };
 
 interface AppSidebarProps {
+  initiatives: Initiative[];
+  selectedInitiative: Initiative | null;
   onInitiativeClick: (initiative: Initiative) => void;
 }
 
-export function AppSidebar({ onInitiativeClick }: AppSidebarProps) {
+export function AppSidebar({ initiatives, selectedInitiative, onInitiativeClick }: AppSidebarProps) {
   const { state } = useSidebar();
-  const [initiatives, setInitiatives] = useState<Initiative[]>([]);
-  const [selectedInitiative, setSelectedInitiative] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchInitiatives = async () => {
-      try {
-        const response = await fetch("/initiatives_v2.json");
-        if (response.ok) {
-          const data = await response.json();
-          setInitiatives(data);
-        }
-      } catch (error) {
-        console.error("Failed to load initiatives:", error);
-      }
-    };
-
-    fetchInitiatives();
-  }, []);
-
-  const handleInitiativeClick = (initiative: Initiative) => {
-    setSelectedInitiative(initiative.id);
-    onInitiativeClick(initiative);
-  };
-
   const isCollapsed = state === "collapsed";
 
   return (
     <Sidebar className="border-r border-border h-[calc(100vh-4rem)]">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            Initiatives
+          <SidebarGroupLabel>
+            Menu
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {initiatives.map((initiative) => {
                 const IconComponent = iconMap[initiative.icon] || Cpu;
-                const isSelected = selectedInitiative === initiative.id;
+                const isSelected = selectedInitiative?.id === initiative.id;
 
                 return (
                   <SidebarMenuItem key={initiative.id}>
                     <SidebarMenuButton
-                      onClick={() => handleInitiativeClick(initiative)}
+                      onClick={() => onInitiativeClick(initiative)}
                       className={`w-full ${isSelected ? 'bg-accent text-accent-foreground' : ''}`}
                     >
                       <div className="flex items-center gap-2">

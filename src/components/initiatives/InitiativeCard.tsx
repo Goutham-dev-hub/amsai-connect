@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { 
   ChevronRight,
   Hospital, 
@@ -14,7 +16,10 @@ import {
   Code,
   Activity,
   Users,
-  ShoppingCart
+  ShoppingCart,
+  Home,
+  HeartPulse,
+  HeartOff
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,6 +30,7 @@ interface SubInitiative {
   icon: string;
   iconColor: string;
   url: string;
+  healthCheckUrl?: string;
 }
 
 interface Initiative {
@@ -33,15 +39,18 @@ interface Initiative {
   description: string;
   icon: string;
   iconColor: string;
-  url: string;
+  url?: string;
+  healthCheckUrl?: string;
   subInitiatives?: SubInitiative[];
 }
 
 interface InitiativeCardProps {
   initiative: Initiative;
+  onInitiativeSelect?: (initiative: Initiative) => void;
 }
 
 const iconMap: Record<string, any> = {
+  home: Home,
   hospital: Hospital,
   database: Database,
   truck: Truck,
@@ -57,12 +66,17 @@ const iconMap: Record<string, any> = {
   "shopping-cart": ShoppingCart,
 };
 
-const InitiativeCard = ({ initiative }: InitiativeCardProps) => {
+const InitiativeCard = ({ initiative, onInitiativeSelect }: InitiativeCardProps) => {
+  const [healthStatus, setHealthStatus] = useState<'idle' | 'checking' | 'ok' | 'failed'>('idle');
   const IconComponent = iconMap[initiative.icon] || Cpu;
   const hasSubInitiatives = initiative.subInitiatives && initiative.subInitiatives.length > 0;
 
   const handleClick = () => {
-    if (initiative.url && initiative.url !== "#") {
+    if (initiative.id === 'dashboard' && onInitiativeSelect) {
+        onInitiativeSelect(initiative);
+    } else if (hasSubInitiatives && onInitiativeSelect) {
+      onInitiativeSelect(initiative);
+    } else if (initiative.url && initiative.url !== "#") {
       window.open(initiative.url, "_blank", "noopener,noreferrer");
     }
   };
@@ -74,16 +88,55 @@ const InitiativeCard = ({ initiative }: InitiativeCardProps) => {
     }
   };
 
+  const handleHealthCheck = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (healthStatus === 'checking') return;
+
+    setHealthStatus('checking');
+    // Simulate API call
+    setTimeout(() => {
+        const isSuccess = Math.random() > 0.3; // 70% chance of success
+        setHealthStatus(isSuccess ? 'ok' : 'failed');
+
+        // Reset to idle after a few seconds
+        setTimeout(() => {
+            setHealthStatus('idle');
+        }, 3000);
+    }, 2000);
+  };
+
+  const isChecking = healthStatus === 'checking';
+  const iconTextColorClass = initiative.iconColor.replace('bg-', 'text-');
+
   return (
     <Card
-      className="group cursor-pointer transition-all duration-200 hover:shadow-card-hover hover:scale-[1.02] border border-border/50 bg-card"
+      className="group cursor-pointer transition-all duration-200 hover:shadow-card-hover hover:scale-[1.02] border border-border/50 bg-card relative"
       onClick={handleClick}
     >
+        {initiative.healthCheckUrl && (
+            <Button 
+                variant="ghost"
+                size="icon"
+                className="absolute top-2 right-2 h-8 w-8 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-100"
+                onClick={handleHealthCheck}
+                disabled={isChecking}
+            >
+                {healthStatus === 'failed' ? (
+                    <HeartOff className="h-4 w-4 text-destructive" />
+                ) : (
+                    <HeartPulse className={cn(
+                        "h-4 w-4",
+                        isChecking && "animate-ping",
+                        healthStatus === 'ok' ? "text-green-500" : iconTextColorClass
+                    )} />
+                )}
+            </Button>
+        )}
       <CardContent className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className={cn("flex h-12 w-12 items-center justify-center rounded-lg", initiative.iconColor || "bg-primary")}>
-              <IconComponent className="h-6 w-6 text-primary-foreground" />
+              {IconComponent && <IconComponent className="h-6 w-6 text-white" />}
             </div>
             <div>
               <h3 className="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
@@ -96,7 +149,8 @@ const InitiativeCard = ({ initiative }: InitiativeCardProps) => {
               )}
             </div>
           </div>
-          <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+          {/* This is a spacer to prevent title from overlapping the button */}
+          <div className="w-8"></div>
         </div>
 
         <div className="space-y-3">
@@ -105,7 +159,7 @@ const InitiativeCard = ({ initiative }: InitiativeCardProps) => {
           </p>
           
           {hasSubInitiatives && (
-            <div className="space-y-2">
+            <div className="space-y-2 pt-2">
               <h4 className="text-sm font-medium text-foreground">Available Tools:</h4>
               <div className="grid gap-2">
                 {initiative.subInitiatives!.slice(0, 3).map((subItem) => {
@@ -117,7 +171,7 @@ const InitiativeCard = ({ initiative }: InitiativeCardProps) => {
                       onClick={(e) => handleSubInitiativeClick(e, subItem)}
                     >
                        <div className={cn("p-1 rounded", subItem.iconColor || "bg-primary")}>
-                        <SubIconComponent className="h-3 w-3 text-primary-foreground" />
+                        {SubIconComponent && <SubIconComponent className="h-3 w-3 text-white" />}
                       </div>
                       <span className="text-xs text-muted-foreground truncate">{subItem.title}</span>
                     </div>

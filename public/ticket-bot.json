@@ -1,0 +1,14 @@
+{
+  "summary": {
+    "openTickets": 14,
+    "resolvedToday": 28,
+    "priorityTickets": 3
+  },
+  "series": [
+    { "day": "Monday", "opened": 20, "resolved": 18 },
+    { "day": "Tuesday", "opened": 30, "resolved": 25 },
+    { "day": "Wednesday", "opened": 25, "resolved": 28 },
+    { "day": "Thursday", "opened": 35, "resolved": 32 },
+    { "day": "Friday", "opened": 22, "resolved": 24 }
+  ]
+}

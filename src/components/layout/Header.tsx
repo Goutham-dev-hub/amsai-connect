@@ -41,7 +41,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center gap-4">
             <SidebarTrigger />
-            <h1 className="text-xl font-bold tracking-wide">AMS.AI</h1>
+            <h1 className="text-xl font-bold tracking-wide">Genisys Delivery Excellence Portal</h1>
           </div>
 
           {/* User Profile & Logout */}

@@ -1,11 +1,19 @@
 [
   {
+    "id": "dashboard",
+    "title": "Dashboard",
+    "description": "Main dashboard for AMS.AI Platform",
+    "icon": "home",
+    "iconColor": "bg-sky-500"
+  },
+  {
     "id": "nhs-framework",
     "title": "NHS Framework",
     "description": "Healthcare-focused AI framework for compliance and automation",
     "icon": "hospital",
     "iconColor": "bg-red-500",
-    "url": "#"
+    "url": "#",
+    "healthCheckUrl": "/api/health/nhs-framework"
   },
   {
     "id": "nlp-sql",
@@ -13,7 +21,8 @@
     "description": "Natural Language to SQL conversion powered by Data.ai",
     "icon": "database",
     "iconColor": "bg-blue-600",
-    "url": "#"
+    "url": "#",
+    "healthCheckUrl": "/api/health/nlp-sql"
   },
   {
     "id": "delivery-2",
@@ -45,7 +54,8 @@
         "description": "Proactive system monitoring",
         "icon": "eye",
         "iconColor": "bg-blue-500",
-        "url": "#"
+        "url": "#",
+        "healthCheckUrl": "/api/health/watchbot"
       },
       {
         "id": "ticket-bot",
@@ -53,7 +63,8 @@
         "description": "Auto-track and resolve tickets",
         "icon": "ticket",
         "iconColor": "bg-yellow-500",
-        "url": "#"
+        "url": "#",
+        "healthCheckUrl": "/api/health/ticket-bot"
       },
       {
         "id": "log-monitor",
@@ -61,7 +72,8 @@
         "description": "Anomaly and error detection",
         "icon": "file-text",
         "iconColor": "bg-purple-500",
-        "url": "#"
+        "url": "#",
+        "healthCheckUrl": "/api/health/log-monitor"
       },
       {
         "id": "agent-bot",
@@ -69,7 +81,8 @@
         "description": "Support ticket assistant",
         "icon": "bot",
         "iconColor": "bg-green-500",
-        "url": "#"
+        "url": "#",
+        "healthCheckUrl": "/api/health/agent-bot"
       },
       {
         "id": "code-copilot",
@@ -77,7 +90,8 @@
         "description": "Source code generator & bug fix helper",
         "icon": "code",
         "iconColor": "bg-indigo-500",
-        "url": "#"
+        "url": "#",
+        "healthCheckUrl": "/api/health/code-copilot"
       },
       {
         "id": "tsense",
@@ -85,7 +99,8 @@
         "description": "Telemetry insights",
         "icon": "activity",
         "iconColor": "bg-pink-400",
-        "url": "#"
+        "url": "#",
+        "healthCheckUrl": "/api/health/tsense"
       },
       {
         "id": "csense",
@@ -93,7 +108,8 @@
         "description": "Customer behavior insights",
         "icon": "users",
         "iconColor": "bg-cyan-500",
-        "url": "#"
+        "url": "#",
+        "healthCheckUrl": "/api/health/csense"
       },
       {
         "id": "ecommerce-portal",
@@ -101,7 +117,8 @@
         "description": "Digital marketplace",
         "icon": "shopping-cart",
         "iconColor": "bg-teal-500",
-        "url": "#"
+        "url": "#",
+        "healthCheckUrl": "/api/health/ecommerce-portal"
       }
     ]
   }

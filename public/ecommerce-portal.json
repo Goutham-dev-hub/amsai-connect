@@ -1,0 +1,14 @@
+{
+  "summary": {
+    "totalSalesUSD": 15234.50,
+    "ordersToday": 89,
+    "conversionRatePercentage": 4.2
+  },
+  "series": [
+    { "month": "Jan", "sales": 2000 },
+    { "month": "Feb", "sales": 3500 },
+    { "month": "Mar", "sales": 2800 },
+    { "month": "Apr", "sales": 4200 },
+    { "month": "May", "sales": 5100 }
+  ]
+}

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useIsAuthenticated } from "@azure/msal-react";
 import Header from "@/components/layout/Header";
 import LoginButton from "@/components/auth/LoginButton";
 import InitiativesGrid from "@/components/initiatives/InitiativesGrid";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import Dashboard from "@/components/dashboard/Dashboard";
 
 interface Initiative {
   id: string;
@@ -12,7 +13,7 @@ interface Initiative {
   description: string;
   icon: string;
   iconColor: string;
-  url: string;
+  url?: string;
   subInitiatives?: {
     id: string;
     title: string;
@@ -25,7 +26,28 @@ interface Initiative {
 
 const Index = () => {
   const isAuthenticated = useIsAuthenticated();
+  const [initiatives, setInitiatives] = useState<Initiative[]>([]);
   const [selectedInitiative, setSelectedInitiative] = useState<Initiative | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchInitiatives = async () => {
+      try {
+        const response = await fetch("/initiatives_v2.json");
+        const data: Initiative[] = await response.json();
+        setInitiatives(data);
+        if (data.length > 0) {
+          setSelectedInitiative(data[0]); // Select dashboard by default
+        }
+      } catch (error) {
+        console.error("Failed to load initiatives:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInitiatives();
+  }, []);
 
   if (!isAuthenticated) {
     return <LoginButton />;
@@ -35,14 +57,48 @@ const Index = () => {
     setSelectedInitiative(initiative);
   };
 
+  const renderContent = () => {
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-[400px]">
+                <div className="text-muted-foreground">Loading...</div>
+            </div>
+        );
+    }
+
+    if (!selectedInitiative) {
+        return (
+            <div className="flex items-center justify-center min-h-[400px]">
+                <div className="text-muted-foreground">No initiatives found.</div>
+            </div>
+        );
+    }
+
+    if (selectedInitiative.id === 'dashboard') {
+      return <Dashboard />;
+    }
+
+    return (
+      <InitiativesGrid
+        initiatives={initiatives}
+        selectedInitiative={selectedInitiative}
+        onInitiativeSelect={handleInitiativeClick}
+      />
+    );
+  };
+
   return (
     <SidebarProvider>
       <div className="min-h-screen bg-background">
         <Header />
         <div className="flex pt-16"> {/* Add padding-top to account for fixed header */}
-          <AppSidebar onInitiativeClick={handleInitiativeClick} />
+          <AppSidebar 
+            initiatives={initiatives}
+            selectedInitiative={selectedInitiative}
+            onInitiativeClick={handleInitiativeClick} 
+          />
           <main className="flex-1 overflow-auto">
-            <InitiativesGrid selectedInitiative={selectedInitiative} />
+            {renderContent()}
           </main>
         </div>
       </div>

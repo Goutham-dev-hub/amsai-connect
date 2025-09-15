@@ -1,0 +1,6 @@
+{
+  "status": "All Systems Operational",
+  "monitoredServices": 42,
+  "incidentsToday": 1,
+  "p99Latency": "120ms"
+}
