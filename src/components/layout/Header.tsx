@@ -1,5 +1,6 @@
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { Button } from "@/components/ui/button";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { LogOut, User } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -38,7 +39,8 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-4">
+            <SidebarTrigger />
             <h1 className="text-xl font-bold tracking-wide">AMS.AI</h1>
           </div>
 

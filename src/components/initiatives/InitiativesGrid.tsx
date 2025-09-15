@@ -1,13 +1,23 @@
 import { useState, useEffect } from "react";
 import InitiativeCard from "./InitiativeCard";
 
+interface SubInitiative {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  iconColor: string;
+  url: string;
+}
+
 interface Initiative {
   id: string;
   title: string;
   description: string;
   icon: string;
-  color: string;
+  iconColor: string;
   url: string;
+  subInitiatives?: SubInitiative[];
 }
 
 const InitiativesGrid = () => {
@@ -18,12 +28,12 @@ const InitiativesGrid = () => {
   useEffect(() => {
     const fetchInitiatives = async () => {
       try {
-        const response = await fetch("/initiatives.json");
+        const response = await fetch("/initiatives_v2.json");
         if (!response.ok) {
           throw new Error("Failed to load initiatives");
         }
         const data = await response.json();
-        setInitiatives(data.initiatives);
+        setInitiatives(data);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error");
       } finally {
