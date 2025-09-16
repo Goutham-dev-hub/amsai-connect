@@ -15,7 +15,7 @@ interface Initiative {
   description: string;
   icon: string;
   iconColor: string;
-  url: string;
+  url?: string;
   subInitiatives?: SubInitiative[];
 }
 
