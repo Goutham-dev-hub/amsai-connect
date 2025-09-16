@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { LogOut, User } from "lucide-react";
 import { useState, useEffect } from "react";
+import { DarkModeToggle } from "@/components/theme/DarkModeToggle";
 
 interface UserProfile {
   displayName?: string;
@@ -14,6 +15,7 @@ const Header = () => {
   const { instance, accounts } = useMsal();
   const isAuthenticated = useIsAuthenticated();
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const isDarkModeEnabled = import.meta.env.VITE_ENABLE_DARK_MODE === 'true';
 
   useEffect(() => {
     if (isAuthenticated && accounts[0]) {
@@ -44,26 +46,29 @@ const Header = () => {
             <h1 className="text-xl font-bold tracking-wide">Genisys Delivery Excellence Portal</h1>
           </div>
 
-          {/* User Profile & Logout */}
-          {isAuthenticated && userProfile && (
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-sm">
-                <User className="h-4 w-4" />
-                <span className="hidden sm:inline">
-                  {userProfile.displayName || userProfile.mail || userProfile.userPrincipalName}
-                </span>
-              </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLogout}
-                className="border-primary-foreground/20 text-primary-foreground bg-primary-foreground/10"
-              >
-                <LogOut className="h-4 w-4 mr-2" />
-                Logout
-              </Button>
-            </div>
-          )}
+          {/* User Profile & Actions */}
+          <div className="flex items-center gap-4">
+            {isDarkModeEnabled && <DarkModeToggle />}
+            {isAuthenticated && userProfile && (
+              <>
+                <div className="flex items-center gap-2 text-sm">
+                  <User className="h-4 w-4" />
+                  <span className="hidden sm:inline">
+                    {userProfile.displayName || userProfile.mail || userProfile.userPrincipalName}
+                  </span>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="border-primary-foreground/20 text-primary-foreground bg-primary-foreground/10"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </header>
