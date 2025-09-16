@@ -76,16 +76,13 @@ export function AppSidebar({ initiatives, selectedInitiative, onInitiativeClick 
   return (
     <Sidebar 
       style={{position:"fixed", top:"68px"}} 
-      className="border-r border-sidebar-border bg-sidebar shadow-lg h-[calc(100vh-4rem)]"
+      className="border-r border-sidebar-border bg-sidebar h-[calc(100vh-4rem)]"
     >
       <SidebarContent className="p-0">
         <div className="p-6 border-b border-sidebar-border">
           <h2 className="text-lg font-semibold text-sidebar-foreground">
-            Navigation
+            Menu
           </h2>
-          <p className="text-sm text-sidebar-foreground/70 mt-1">
-            AMS.AI Platform
-          </p>
         </div>
         <SidebarGroup className="px-4 py-2">
           <SidebarGroupContent>
@@ -99,38 +96,19 @@ export function AppSidebar({ initiatives, selectedInitiative, onInitiativeClick 
                     <SidebarMenuButton
                       onClick={() => onInitiativeClick(initiative)}
                       className={`
-                        w-full px-4 py-3 rounded-lg transition-all duration-200 group
+                        w-full px-4 py-3 rounded-lg
                         ${isSelected 
-                          ? 'bg-sidebar-accent text-sidebar-accent-foreground shadow-sm border border-sidebar-accent/20' 
-                          : 'hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground text-sidebar-foreground/80'
+                          ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                          : 'text-sidebar-foreground'
                         }
                       `}
                     >
                       <div className="flex items-center gap-3">
-                        <div className={`
-                          flex items-center justify-center w-8 h-8 rounded-md shrink-0
-                          ${isSelected 
-                            ? 'bg-sidebar-primary text-sidebar-primary-foreground' 
-                            : 'bg-sidebar-accent/30 text-sidebar-foreground/60 group-hover:bg-sidebar-primary group-hover:text-sidebar-primary-foreground'
-                          }
-                          transition-all duration-200
-                        `}>
-                          <IconComponent className="h-4 w-4" />
-                        </div>
+                        <IconComponent className="h-4 w-4" />
                         {!isCollapsed && (
-                          <div className="flex flex-col items-start min-w-0">
-                            <span className="font-medium text-sm truncate">
-                              {initiative.title}
-                            </span>
-                            {initiative.description && (
-                              <span className="text-xs opacity-60 truncate max-w-full">
-                                {initiative.description.length > 40 
-                                  ? `${initiative.description.substring(0, 40)}...` 
-                                  : initiative.description
-                                }
-                              </span>
-                            )}
-                          </div>
+                          <span className="font-medium text-sm">
+                            {initiative.title}
+                          </span>
                         )}
                       </div>
                     </SidebarMenuButton>
