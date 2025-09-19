@@ -12,10 +12,16 @@ interface SubInitiative {
 
 interface Initiative {
   id: string;
+  title: string;
+  iconColor: string;
   subInitiatives?: SubInitiative[];
 }
 
-export const Dashboard = () => {
+interface DashboardProps {
+  selectedInitiative?: Initiative;
+}
+
+export const Dashboard = ({ selectedInitiative }: DashboardProps) => {
   const [amsAiSubInitiatives, setAmsAiSubInitiatives] = useState<SubInitiative[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -43,6 +49,18 @@ export const Dashboard = () => {
         <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-muted-foreground">Loading dashboard...</div>
         </div>
+    );
+  }
+
+  // If a specific initiative is selected, show its dashboard
+  if (selectedInitiative && selectedInitiative.id !== "ams-ai") {
+    return (
+      <div className="container mx-auto px-6 py-8">
+        <h2 className="text-3xl font-bold text-foreground mb-8">{selectedInitiative.title} Dashboard</h2>
+        <div className="grid grid-cols-1 gap-6">
+          <DashboardWidget key={selectedInitiative.id} initiative={selectedInitiative} />
+        </div>
+      </div>
     );
   }
 

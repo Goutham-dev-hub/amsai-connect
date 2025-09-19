@@ -78,6 +78,10 @@ const Index = () => {
       return <Dashboard />;
     }
 
+    if (selectedInitiative.id === 'api-testing') {
+      return <Dashboard selectedInitiative={selectedInitiative} />;
+    }
+
     return (
       <InitiativesGrid
         initiatives={initiatives}
