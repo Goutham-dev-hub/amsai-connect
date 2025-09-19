@@ -73,40 +73,40 @@ export const ApiTestAutomationChart = ({ data }: ApiTestAutomationChartProps) =>
   });
 
   return (
-    <div className="space-y-6">
+    <div className="w-full space-y-8">
       {/* Summary Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-muted/50 p-3 rounded-lg text-center">
-          <div className="text-2xl font-bold text-primary">{aggregatedData.totalTests}</div>
+      <div className="grid grid-cols-4 gap-6">
+        <div className="bg-muted/50 p-6 rounded-lg text-center">
+          <div className="text-3xl font-bold text-primary">{aggregatedData.totalTests}</div>
           <div className="text-sm text-muted-foreground">Total Tests</div>
         </div>
-        <div className="bg-muted/50 p-3 rounded-lg text-center">
-          <div className="text-2xl font-bold text-green-600">{aggregatedData.totalPassed}</div>
+        <div className="bg-muted/50 p-6 rounded-lg text-center">
+          <div className="text-3xl font-bold text-green-600">{aggregatedData.totalPassed}</div>
           <div className="text-sm text-muted-foreground">Passed</div>
         </div>
-        <div className="bg-muted/50 p-3 rounded-lg text-center">
-          <div className="text-2xl font-bold text-destructive">{aggregatedData.totalFailed}</div>
+        <div className="bg-muted/50 p-6 rounded-lg text-center">
+          <div className="text-3xl font-bold text-destructive">{aggregatedData.totalFailed}</div>
           <div className="text-sm text-muted-foreground">Failed</div>
         </div>
-        <div className="bg-muted/50 p-3 rounded-lg text-center">
-          <div className="text-2xl font-bold text-orange-500">{aggregatedData.totalPending}</div>
+        <div className="bg-muted/50 p-6 rounded-lg text-center">
+          <div className="text-3xl font-bold text-orange-500">{aggregatedData.totalPending}</div>
           <div className="text-sm text-muted-foreground">Pending</div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Test Status Distribution */}
         {pieData.length > 0 && (
-          <div className="bg-card rounded-lg p-4">
-            <h3 className="text-lg font-semibold mb-4">Test Status Distribution</h3>
-            <ResponsiveContainer width="100%" height={200}>
+          <div className="bg-card rounded-lg p-6">
+            <h3 className="text-xl font-semibold mb-6">Test Status Distribution</h3>
+            <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
                   data={pieData}
                   cx="50%"
                   cy="50%"
-                  innerRadius={40}
-                  outerRadius={80}
+                  innerRadius={60}
+                  outerRadius={120}
                   paddingAngle={5}
                   dataKey="value"
                 >
@@ -121,9 +121,9 @@ export const ApiTestAutomationChart = ({ data }: ApiTestAutomationChartProps) =>
         )}
 
         {/* User Performance */}
-        <div className="bg-card rounded-lg p-4">
-          <h3 className="text-lg font-semibold mb-4">User Test Results</h3>
-          <ResponsiveContainer width="100%" height={200}>
+        <div className="bg-card rounded-lg p-6">
+          <h3 className="text-xl font-semibold mb-6">User Test Results</h3>
+          <ResponsiveContainer width="100%" height={300}>
             <BarChart data={userBarData}>
               <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
               <XAxis dataKey="user" />
