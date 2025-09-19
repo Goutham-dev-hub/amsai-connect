@@ -55,9 +55,9 @@ export const Dashboard = ({ selectedInitiative }: DashboardProps) => {
   // If a specific initiative is selected, show its dashboard
   if (selectedInitiative && selectedInitiative.id !== "ams-ai") {
     return (
-      <div className="container mx-auto px-6 py-8">
+      <div className="w-full px-6 py-8">
         <h2 className="text-3xl font-bold text-foreground mb-8">{selectedInitiative.title} Dashboard</h2>
-        <div className="grid grid-cols-1 gap-6">
+        <div className="w-full max-w-none">
           <DashboardWidget key={selectedInitiative.id} initiative={selectedInitiative} />
         </div>
       </div>
