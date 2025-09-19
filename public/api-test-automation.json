@@ -1,0 +1,106 @@
+{
+  "Chiranjeev": {
+    "id": "1",
+    "role": "SD",
+    "projects": [
+      {
+        "name": "Testing API",
+        "id": "e3c78086-8489-4e01-a6a2-bd3ec518ffc9",
+        "data": {
+          "totalEndpoints": 2,
+          "endpoints": [
+            {
+              "passed": 0,
+              "failed": 0,
+              "pending": 6,
+              "endpointId": "19792202-7a58-435a-b6da-94f79ad8b2cc",
+              "endpointName": "https://catfact.ninja/fact",
+              "totalTestCases": 6
+            },
+            {
+              "passed": 3,
+              "failed": 1,
+              "pending": 0,
+              "endpointId": "0d46f7f4-c4d9-4f85-93b6-3d83a065265f",
+              "endpointName": "https://catfact.ninja/facts",
+              "totalTestCases": 4
+            }
+          ]
+        }
+      },
+      {
+        "name": "Authorization Testing",
+        "id": "fd4065fd-e341-4d15-8c13-954e24748de5",
+        "data": {
+          "totalEndpoints": 2,
+          "endpoints": [
+            {
+              "passed": 0,
+              "failed": 0,
+              "pending": 0,
+              "endpointId": "b325fe12-45b6-4c13-86db-b670d7a10bcb",
+              "endpointName": "http://localhost:3000/loginTokenAsHeaders",
+              "totalTestCases": 0
+            },
+            {
+              "passed": 0,
+              "failed": 0,
+              "pending": 0,
+              "endpointId": "cee47598-08b0-4f4d-aace-8483c44b20aa",
+              "endpointName": "http://localhost:3000/getUsers",
+              "totalTestCases": 0
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Ankit": {
+    "id": "2",
+    "role": "SD",
+    "projects": [
+      {
+        "name": "Testing API",
+        "id": "e3c78086-8489-4e01-a6a2-bd3ec518ffc9",
+        "data": {
+          "totalEndpoints": 1,
+          "endpoints": [
+            {
+              "passed": 0,
+              "failed": 0,
+              "pending": 6,
+              "endpointId": "19792202-7a58-435a-b6da-94f79ad8b2cc",
+              "endpointName": "https://catfact.ninja/fact",
+              "totalTestCases": 6
+            }
+          ]
+        }
+      },
+      {
+        "name": "Authorization Testing",
+        "id": "fd4065fd-e341-4d15-8c13-954e24748de5",
+        "data": {
+          "totalEndpoints": 2,
+          "endpoints": [
+            {
+              "passed": 0,
+              "failed": 0,
+              "pending": 0,
+              "endpointId": "b325fe12-45b6-4c13-86db-b670d7a10bcb",
+              "endpointName": "http://localhost:3000/loginTokenAsHeaders",
+              "totalTestCases": 0
+            },
+            {
+              "passed": 0,
+              "failed": 0,
+              "pending": 0,
+              "endpointId": "cee47598-08b0-4f4d-aace-8483c44b20aa",
+              "endpointName": "http://localhost:3000/getUsers",
+              "totalTestCases": 0
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
