@@ -73,40 +73,40 @@ export const ApiTestAutomationChart = ({ data }: ApiTestAutomationChartProps) =>
   });
 
   return (
-    <div className="w-full space-y-8">
+    <div className="w-full p-6 space-y-6">
       {/* Summary Stats */}
-      <div className="grid grid-cols-4 gap-6">
-        <div className="bg-muted/50 p-6 rounded-lg text-center">
-          <div className="text-3xl font-bold text-primary">{aggregatedData.totalTests}</div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="bg-muted/50 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-primary">{aggregatedData.totalTests}</div>
           <div className="text-sm text-muted-foreground">Total Tests</div>
         </div>
-        <div className="bg-muted/50 p-6 rounded-lg text-center">
-          <div className="text-3xl font-bold text-green-600">{aggregatedData.totalPassed}</div>
+        <div className="bg-muted/50 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-green-600">{aggregatedData.totalPassed}</div>
           <div className="text-sm text-muted-foreground">Passed</div>
         </div>
-        <div className="bg-muted/50 p-6 rounded-lg text-center">
-          <div className="text-3xl font-bold text-destructive">{aggregatedData.totalFailed}</div>
+        <div className="bg-muted/50 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-destructive">{aggregatedData.totalFailed}</div>
           <div className="text-sm text-muted-foreground">Failed</div>
         </div>
-        <div className="bg-muted/50 p-6 rounded-lg text-center">
-          <div className="text-3xl font-bold text-orange-500">{aggregatedData.totalPending}</div>
+        <div className="bg-muted/50 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-orange-500">{aggregatedData.totalPending}</div>
           <div className="text-sm text-muted-foreground">Pending</div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* Test Status Distribution */}
         {pieData.length > 0 && (
-          <div className="bg-card rounded-lg p-6">
-            <h3 className="text-xl font-semibold mb-6">Test Status Distribution</h3>
-            <ResponsiveContainer width="100%" height={300}>
+          <div className="bg-card border rounded-lg p-6">
+            <h3 className="text-lg font-semibold mb-4">Test Status Distribution</h3>
+            <ResponsiveContainer width="100%" height={280}>
               <PieChart>
                 <Pie
                   data={pieData}
                   cx="50%"
                   cy="50%"
-                  innerRadius={60}
-                  outerRadius={120}
+                  innerRadius={50}
+                  outerRadius={100}
                   paddingAngle={5}
                   dataKey="value"
                 >
@@ -121,10 +121,10 @@ export const ApiTestAutomationChart = ({ data }: ApiTestAutomationChartProps) =>
         )}
 
         {/* User Performance */}
-        <div className="bg-card rounded-lg p-6">
-          <h3 className="text-xl font-semibold mb-6">User Test Results</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={userBarData}>
+        <div className="bg-card border rounded-lg p-6">
+          <h3 className="text-lg font-semibold mb-4">User Test Results</h3>
+          <ResponsiveContainer width="100%" height={280}>
+            <BarChart data={userBarData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
               <XAxis dataKey="user" />
               <YAxis />
@@ -138,25 +138,25 @@ export const ApiTestAutomationChart = ({ data }: ApiTestAutomationChartProps) =>
       </div>
 
       {/* Detailed Endpoint View */}
-      <div className="bg-card rounded-lg p-4">
+      <div className="bg-card border rounded-lg p-6">
         <h3 className="text-lg font-semibold mb-4">Endpoint Details</h3>
         <div className="space-y-4">
           {Object.entries(data).map(([userName, userData]) => (
             <div key={userName} className="border rounded-lg p-4">
-              <h4 className="font-medium text-primary mb-2">{userName} ({userData.role})</h4>
+              <h4 className="font-medium text-primary mb-3">{userName} ({userData.role})</h4>
               {userData.projects.map(project => (
-                <div key={project.id} className="ml-4 space-y-2">
-                  <h5 className="font-medium text-sm">{project.name}</h5>
+                <div key={project.id} className="ml-4 space-y-3">
+                  <h5 className="font-medium text-sm text-foreground">{project.name}</h5>
                   <div className="grid gap-2">
                     {project.data.endpoints.map(endpoint => (
-                      <div key={endpoint.endpointId} className="flex items-center justify-between text-sm bg-muted/30 p-2 rounded">
-                        <span className="truncate max-w-[200px]" title={endpoint.endpointName}>
+                      <div key={endpoint.endpointId} className="flex items-center justify-between text-sm bg-muted/30 p-3 rounded">
+                        <span className="truncate max-w-[300px]" title={endpoint.endpointName}>
                           {endpoint.endpointName}
                         </span>
-                        <div className="flex gap-2 text-xs">
-                          <span className="text-green-600">✓{endpoint.passed}</span>
-                          <span className="text-destructive">✗{endpoint.failed}</span>
-                          <span className="text-orange-500">⏳{endpoint.pending}</span>
+                        <div className="flex gap-3 text-xs">
+                          <span className="text-green-600 font-medium">✓ {endpoint.passed}</span>
+                          <span className="text-destructive font-medium">✗ {endpoint.failed}</span>
+                          <span className="text-orange-500 font-medium">⏳ {endpoint.pending}</span>
                         </div>
                       </div>
                     ))}
