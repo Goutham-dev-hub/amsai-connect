@@ -8,6 +8,9 @@ import { PublicClientApplication } from "@azure/msal-browser";
 import { msalConfig } from "@/config/authConfig";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import Index from "./pages/Index";
+import DashboardPage from "./pages/DashboardPage";
+import InitiativePage from "./pages/InitiativePage";
+import SubInitiativePage from "./pages/SubInitiativePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +25,9 @@ const AppContent = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/initiative/:initiativeId" element={<InitiativePage />} />
+          <Route path="/initiative/:initiativeId/:subInitiativeId" element={<SubInitiativePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,4 +1,5 @@
 import InitiativeCard from "./InitiativeCard";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface SubInitiative {
   id: string;
@@ -26,9 +27,21 @@ interface InitiativesGridProps {
 }
 
 const InitiativesGrid = ({ initiatives, selectedInitiative, onInitiativeSelect }: InitiativesGridProps) => {
+  const navigate = useNavigate();
+  const { initiativeId } = useParams();
   const displayInitiatives = selectedInitiative
     ? selectedInitiative.subInitiatives || []
     : initiatives;
+
+  const handleInitiativeSelect = (initiative: Initiative | SubInitiative) => {
+    if (selectedInitiative && selectedInitiative.subInitiatives) {
+      // This is a sub-initiative click
+      navigate(`/initiative/${initiativeId}/${initiative.id}`);
+    } else {
+      // This is a main initiative click
+      navigate(`/initiative/${initiative.id}`);
+    }
+  };
 
   return (
     <div className="container mx-auto px-6 py-8">
@@ -49,7 +62,7 @@ const InitiativesGrid = ({ initiatives, selectedInitiative, onInitiativeSelect }
             <InitiativeCard
               key={initiative.id}
               initiative={initiative}
-              onInitiativeSelect={onInitiativeSelect}
+              onInitiativeSelect={handleInitiativeSelect}
             />
           ))}
         </div>
