@@ -14,8 +14,10 @@ const Index = () => {
     const handleSilentLogin = async () => {
       try {
         const accounts = instance.getAllAccounts();
+        console.log("Found accounts:", accounts.length);
         
         if (accounts.length > 0) {
+          console.log("Attempting silent login for account:", accounts[0].username);
           // Set the active account
           instance.setActiveAccount(accounts[0]);
           
@@ -25,7 +27,10 @@ const Index = () => {
             account: accounts[0],
           });
           
+          console.log("Silent login successful");
           // If successful, user will be authenticated and redirected
+        } else {
+          console.log("No existing accounts found, showing login screen");
         }
       } catch (error) {
         console.log("Silent login failed:", error);
