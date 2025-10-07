@@ -16,6 +16,7 @@ const Header = () => {
   const isAuthenticated = useIsAuthenticated();
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const isDarkModeEnabled = import.meta.env.VITE_ENABLE_DARK_MODE === 'true';
+  const isGlassThemeEnabled = import.meta.env.VITE_ENABLE_GLASS_THEME === 'true';
 
   useEffect(() => {
     if (isAuthenticated && accounts[0]) {
@@ -37,7 +38,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground shadow-sm">
+    <header className={isGlassThemeEnabled ? "glass-header fixed top-0 left-0 right-0 z-50 shadow-sm" : "fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground shadow-sm"}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}

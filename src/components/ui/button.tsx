@@ -39,7 +39,9 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+    const isGlassThemeEnabled = import.meta.env.VITE_ENABLE_GLASS_THEME === 'true';
+    const glassClass = isGlassThemeEnabled && variant === "outline" ? "glass-button" : "";
+    return <Comp className={cn(buttonVariants({ variant, size }), glassClass, className)} ref={ref} {...props} />;
   },
 );
 Button.displayName = "Button";

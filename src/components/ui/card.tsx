@@ -2,9 +2,12 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("rounded-lg border bg-card text-card-foreground shadow-sm", className)} {...props} />
-));
+const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => {
+  const isGlassThemeEnabled = import.meta.env.VITE_ENABLE_GLASS_THEME === 'true';
+  return (
+    <div ref={ref} className={cn(isGlassThemeEnabled ? "glass-card rounded-lg border shadow-sm" : "rounded-lg border bg-card text-card-foreground shadow-sm", className)} {...props} />
+  );
+});
 Card.displayName = "Card";
 
 const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

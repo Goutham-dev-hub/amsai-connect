@@ -74,11 +74,12 @@ export function AppSidebar({ initiatives, selectedInitiative, onInitiativeClick 
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
   const location = useLocation();
+  const isGlassThemeEnabled = import.meta.env.VITE_ENABLE_GLASS_THEME === 'true';
 
   return (
     <Sidebar 
       style={{position:"fixed", top:"68px"}} 
-      className="border-r border-sidebar-border bg-sidebar h-[calc(100vh-4rem)]"
+      className={isGlassThemeEnabled ? "glass-sidebar border-r h-[calc(100vh-4rem)]" : "border-r border-sidebar-border bg-sidebar h-[calc(100vh-4rem)]"}
     >
       <SidebarContent className="p-0">
         <div className="p-6 border-b border-sidebar-border">
