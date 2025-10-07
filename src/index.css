@@ -117,4 +117,31 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Glass Theme */
+  .glass-theme {
+    @apply relative;
+  }
+
+  .glass-theme::before {
+    content: '';
+    @apply fixed inset-0 z-0 pointer-events-none;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, hsl(var(--accent) / 0.08) 100%);
+  }
+
+  .glass-theme .glass-card {
+    @apply backdrop-blur-xl bg-white/40 dark:bg-gray-900/40 border border-white/20 dark:border-white/10 shadow-2xl;
+  }
+
+  .glass-theme .glass-header {
+    @apply backdrop-blur-xl bg-white/60 dark:bg-gray-900/60 border-b border-white/20 dark:border-white/10;
+  }
+
+  .glass-theme .glass-sidebar {
+    @apply backdrop-blur-xl bg-white/50 dark:bg-gray-900/50 border-r border-white/20 dark:border-white/10;
+  }
+
+  .glass-theme .glass-button {
+    @apply backdrop-blur-sm bg-white/30 dark:bg-gray-800/30 hover:bg-white/40 dark:hover:bg-gray-800/40 border border-white/30 dark:border-white/20;
+  }
 }

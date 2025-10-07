@@ -16,22 +16,25 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 const msalInstance = new PublicClientApplication(msalConfig);
 const isDarkModeEnabled = import.meta.env.VITE_ENABLE_DARK_MODE === 'true';
+const isGlassThemeEnabled = import.meta.env.VITE_ENABLE_GLASS_THEME === 'true';
 
 const AppContent = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/initiative/:initiativeId" element={<InitiativePage />} />
-          <Route path="/initiative/:initiativeId/:subInitiativeId" element={<SubInitiativePage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <div className={isGlassThemeEnabled ? "glass-theme min-h-screen" : ""}>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/initiative/:initiativeId" element={<InitiativePage />} />
+            <Route path="/initiative/:initiativeId/:subInitiativeId" element={<SubInitiativePage />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </TooltipProvider>
   </QueryClientProvider>
 );
